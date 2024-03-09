@@ -32,4 +32,14 @@ public class Cell {
 
         this.player = player;
     }
+
+    public int getX() {
+
+        return x;
+    }
+
+    public int getY() {
+
+        return y;
+    }
 }

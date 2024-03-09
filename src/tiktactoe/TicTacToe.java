@@ -80,8 +80,10 @@ public class TicTacToe {
             gameController.printBoard(game);
             gameController.makeMove(game);
         }
+        gameController.printBoard(game);
         if(gameController.getGameStatus(game) == GameStatus.ENDED){
-            //someone has won the game
+            Player winner = game.getCurrentPlayer();
+            System.out.println("Winner: "+winner.getName()+"🥇");
         }
         else{
             System.out.println("This game has drawn");
