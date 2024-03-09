@@ -33,11 +33,11 @@ public class Game {
 
     public void makeMove() {
         Player player = players.get(currPlayerIdx);
-        Pair<Integer, Integer> rowCol = player.makeMove();
+        Pair<Integer, Integer> rowCol = player.makeMove(board);
         Cell moveOnCell = board.getCells().get(rowCol.getRow()).get(rowCol.getCol());
         while(moveOnCell.getStatus() != CellStatus.UNOCCUPIED){
             System.out.println("The chosen cell is unavailable for the move. Choose another cell.");
-            rowCol = player.makeMove();
+            rowCol = player.makeMove(board);
             moveOnCell = board.getCells().get(rowCol.getRow()).get(rowCol.getCol());
         }
         moveOnCell.setPlayer(player);

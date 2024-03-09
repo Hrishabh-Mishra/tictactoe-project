@@ -72,7 +72,9 @@ public class TicTacToe {
                 c = allowedSymbols.charAt(random.nextInt(allowedSymbols.length()));
             }
             symbolSet.add(c);
-            players.add(new BotPlayer("Bot"+(i+1), new Symbol(c), botDifficultyLevel));
+            BotPlayer botPlayer = new BotPlayer("Bot"+(i+1), new Symbol(c), botDifficultyLevel);
+            players.add(botPlayer);
+            System.out.println(botPlayer.getName()+": "+botPlayer.getBotDifficultyLevel()+": "+botPlayer.getSymbol().getS());
         }
 
         Game game = gameController.createGame(players);

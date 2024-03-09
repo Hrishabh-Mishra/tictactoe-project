@@ -10,7 +10,7 @@ public class HumanPlayer extends Player{
     }
 
     @Override
-    public Pair<Integer, Integer> makeMove() {
+    public Pair<Integer, Integer> makeMove(Board board) {
         Scanner sc = new Scanner(System.in);
         System.out.println("It's "+this.getName()+"'s turn. Enter row and column.");
         int row = sc.nextInt();

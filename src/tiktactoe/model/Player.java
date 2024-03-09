@@ -30,5 +30,5 @@ public abstract class Player {
 
         this.symbol = symbol;
     }
-    public abstract Pair<Integer, Integer> makeMove();
+    public abstract Pair<Integer, Integer> makeMove(Board board);
 }

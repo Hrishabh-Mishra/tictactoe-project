@@ -47,7 +47,7 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         if(isCellOnDiagonal(row, col) && diagonal.get(c) == board.getBoardSize()){
             return true;
         }
-        if(isCellOnRevDiagonal(row, col, board.getBoardSize()) && diagonal.get(c) == board.getBoardSize()){
+        if(isCellOnRevDiagonal(row, col, board.getBoardSize()) && revDiagonal.get(c) == board.getBoardSize()){
             return true;
         }
         //the code will never reach here
