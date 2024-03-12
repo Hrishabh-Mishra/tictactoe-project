@@ -15,6 +15,7 @@ public class HumanPlayer extends Player{
         System.out.println("It's "+this.getName()+"'s turn. Enter row and column.");
         int row = sc.nextInt();
         int col = sc.nextInt();
+        //todo check for row and col should be within board range
         return new Pair<>(row, col);
     }
 }

@@ -40,6 +40,7 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         if(isCellOnRevDiagonal(row, col, board.getBoardSize())){
             revDiagonal.put(c, revDiagonal.getOrDefault(c,0)+1);
         }
+
         //check for win condition
         if(rowMap.get(c) == board.getBoardSize() || colMap.get(c) == board.getBoardSize()){
             return true;

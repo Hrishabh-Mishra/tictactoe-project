@@ -14,19 +14,16 @@ public class Board {
             }
         }
     }
-
     public List<List<Cell>> getCells() {
         return cells;
     }
-
     public void printBoard() {
-        for(int i=0; i<cells.size(); i++){
-            for(int j=0; j<cells.get(i).size(); j++){
-                Cell currCell = cells.get(i).get(j);
-                if(currCell.getStatus() == CellStatus.UNOCCUPIED){
+        for (List<Cell> cell : cells) {
+            for (Cell currCell : cell) {
+                if (currCell.getStatus() == CellStatus.UNOCCUPIED) {
                     System.out.print(" - ");
                 } else if (currCell.getStatus() == CellStatus.OCCUPIED) {
-                    System.out.print(" "+currCell.getPlayer().getSymbol().getS()+" ");
+                    System.out.print(" " + currCell.getPlayer().getSymbol().getS() + " ");
                 }
             }
             System.out.println();

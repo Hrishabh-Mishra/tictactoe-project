@@ -13,15 +13,12 @@ public class BotPlayer extends Player{
         this.botPlayingStrategy = BotPlayerFactory.getBotPlayingStrategy(botDifficultyLevel);
     }
     public BotDifficultyLevel getBotDifficultyLevel() {
-
         return botDifficultyLevel;
     }
 
     public void setBotDifficultyLevel(final BotDifficultyLevel botDifficultyLevel) {
-
         this.botDifficultyLevel = botDifficultyLevel;
     }
-
 
     @Override
     public Pair<Integer, Integer> makeMove(Board board) {
