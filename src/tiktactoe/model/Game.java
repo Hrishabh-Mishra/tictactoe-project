@@ -79,7 +79,7 @@ public class Game {
             this.moves.remove(this.moves.size()-1);
             this.currPlayerIdx = (this.currPlayerIdx - 1) % (this.board.getBoardSize() - 1);
             if(this.currPlayerIdx < 0){
-                this.currPlayerIdx = this.board.getBoardSize() - 1;
+                this.currPlayerIdx = this.players.size() - 1;
             }
         }
     }
@@ -99,6 +99,21 @@ public class Game {
 
     public Player getCurrentPlayer(){
         return players.get(currPlayerIdx);
+    }
+
+    public void replayGame() {
+        //creat a fresh board and play all the moves in it
+        Board replayBoard = new Board(this.players.size() + 1);
+        for(Move move : moves){
+            Cell cell = move.getCell();
+            int x = cell.getX();
+            int y = cell.getY();
+            Player player = move.getPlayer();
+            replayBoard.getCells().get(x).get(y).setPlayer(player);
+            replayBoard.getCells().get(x).get(y).setStatus(CellStatus.OCCUPIED);
+            System.out.println(player.getName()+" played at "+x+", "+y);
+            replayBoard.printBoard();
+        }
     }
 
     public static class GameBuilder {

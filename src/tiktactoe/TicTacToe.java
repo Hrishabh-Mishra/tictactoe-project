@@ -95,5 +95,10 @@ public class TicTacToe {
             System.out.println("This game has drawn");
             gameController.printBoard(game);
         }
+        System.out.println("Do you want to replay the game? (Y/N)");
+        char c = sc.next().charAt(0);
+        if(c == 'Y' || c == 'y'){
+            gameController.replayGame(game);
+        }
     }
 }
