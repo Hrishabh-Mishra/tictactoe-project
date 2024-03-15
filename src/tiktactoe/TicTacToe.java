@@ -26,6 +26,9 @@ public class TicTacToe {
         System.out.println("Enter the number of human players");
         int noOfHumanPlayers = sc.nextInt();
 
+        System.out.println("Enter the total numbers of undo moves allowed");
+        int allowedUndo = sc.nextInt();
+
         List<Player> players = new ArrayList<>();
 
         //handling human players
@@ -39,7 +42,7 @@ public class TicTacToe {
                 c = sc.next().charAt(0);
             }
             symbolSet.add(c);
-            players.add(new HumanPlayer(name, new Symbol(c)));
+            players.add(new HumanPlayer(name, new Symbol(c), allowedUndo));
         }
 
         //handling bot players
@@ -81,10 +84,11 @@ public class TicTacToe {
         while(gameController.getGameStatus(game) == GameStatus.IN_PROGRESS){
             gameController.printBoard(game);
             gameController.makeMove(game);
+            gameController.undoMove(game);
         }
         gameController.printBoard(game);
         if(gameController.getGameStatus(game) == GameStatus.ENDED){
-            Player winner = game.getCurrentPlayer();
+            Player winner = gameController.getCurrentPlayer(game);
             System.out.println("Winner: "+winner.getName()+"🥇");
         }
         else{

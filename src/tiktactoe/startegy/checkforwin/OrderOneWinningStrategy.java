@@ -56,6 +56,24 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         return false;
     }
 
+    @Override
+    public void updateOnUndo(final Board board, final Cell currentCell) {
+        //update the maps
+        int row = currentCell.getX();
+        int col = currentCell.getY();
+        HashMap<Character, Integer> rowMap = rowMaps.get(row);
+        HashMap<Character, Integer> colMap = colMaps.get(col);
+        char c = currentCell.getPlayer().getSymbol().getS();
+        rowMap.put(c, rowMap.get(c)-1);
+        colMap.put(c, colMap.get(c)-1);
+        if(isCellOnDiagonal(row, col)){
+            diagonal.put(c, diagonal.get(c)-1);
+        }
+        if(isCellOnRevDiagonal(row, col, board.getBoardSize())){
+            revDiagonal.put(c, revDiagonal.get(c)-1);
+        }
+    }
+
     private boolean isCellOnRevDiagonal(final int row, final int col, final int boardSize) {
         return row + col == boardSize - 1;
     }

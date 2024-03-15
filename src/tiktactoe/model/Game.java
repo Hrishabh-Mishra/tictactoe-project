@@ -2,6 +2,7 @@ package tiktactoe.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import tiktactoe.startegy.checkforwin.OrderOneWinningStrategy;
 import tiktactoe.startegy.checkforwin.WinningStrategy;
@@ -23,8 +24,8 @@ public class Game {
         this.gameStatus = gameStatus;
         this.winningStrategy = winningStrategy;
     }
-    public static BoardBuilder getBuilder(){
-        return new BoardBuilder();
+    public static GameBuilder getBuilder(){
+        return new GameBuilder();
     }
 
     public void printBoard() {
@@ -52,6 +53,36 @@ public class Game {
         }
         this.currPlayerIdx = (this.currPlayerIdx + 1) % (this.board.getBoardSize() - 1);
     }
+    public void undoMove() {
+        Move toUndoMove = this.moves.get(moves.size()-1);
+        Player prevPlayer = toUndoMove.getPlayer();
+        if(this.gameStatus != GameStatus.IN_PROGRESS){
+            return;
+        }
+        if(prevPlayer instanceof HumanPlayer){
+            HumanPlayer prevHumanPlayer = (HumanPlayer) prevPlayer;
+            int allowedUndoCount = prevHumanPlayer.getTotalAllowedUndo();
+            if(allowedUndoCount <= 0){
+                return;
+            }
+            System.out.println("Do you want to undo? Y/N");
+            Scanner sc = new Scanner(System.in);
+            char c = sc.next().charAt(0);
+            if(c != 'Y' && c!= 'y'){
+                return;
+            }
+            prevHumanPlayer.setTotalAllowedUndo(--allowedUndoCount);
+            Cell toUndoCell = toUndoMove.getCell();
+            winningStrategy.updateOnUndo(this.board, toUndoCell);
+            toUndoCell.setStatus(CellStatus.UNOCCUPIED);
+            toUndoCell.setPlayer(null);
+            this.moves.remove(this.moves.size()-1);
+            this.currPlayerIdx = (this.currPlayerIdx - 1) % (this.board.getBoardSize() - 1);
+            if(this.currPlayerIdx < 0){
+                this.currPlayerIdx = this.board.getBoardSize() - 1;
+            }
+        }
+    }
 
     private boolean checkForWin(final Cell moveOnCell) {
         return winningStrategy.checkForWin(this.board, moveOnCell);
@@ -70,14 +101,14 @@ public class Game {
         return players.get(currPlayerIdx);
     }
 
-    public static class BoardBuilder{
+    public static class GameBuilder {
         private Board board;
         private List<Player> players;
         public Game build(){
             board = new Board(this.players.size()+1);
             return new Game(board, new ArrayList<>(), this.players, 0, GameStatus.IN_PROGRESS, new OrderOneWinningStrategy(board.getBoardSize()));
         }
-        public BoardBuilder setPlayers(final List<Player> players) {
+        public GameBuilder setPlayers(final List<Player> players) {
             this.players = players;
             return this;
         }

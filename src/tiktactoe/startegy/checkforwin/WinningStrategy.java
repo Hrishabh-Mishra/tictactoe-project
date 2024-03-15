@@ -5,4 +5,5 @@ import tiktactoe.model.Cell;
 
 public interface WinningStrategy {
     public boolean checkForWin(Board board, Cell currentCell);
+    public  void updateOnUndo(Board board, Cell currentCell);
 }

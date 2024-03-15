@@ -5,8 +5,10 @@ import java.util.Scanner;
 import tiktactoe.utils.Pair;
 
 public class HumanPlayer extends Player{
-    public HumanPlayer(final String name, final Symbol symbol) {
+    private int totalAllowedUndo;
+    public HumanPlayer(final String name, final Symbol symbol, int totalAllowedUndo) {
         super(name, symbol);
+        this.totalAllowedUndo = totalAllowedUndo;
     }
 
     @Override
@@ -17,5 +19,14 @@ public class HumanPlayer extends Player{
         int col = sc.nextInt();
         //todo check for row and col should be within board range
         return new Pair<>(row, col);
+    }
+    public int getTotalAllowedUndo() {
+
+        return totalAllowedUndo;
+    }
+
+    public void setTotalAllowedUndo(final int totalAllowedUndo) {
+
+        this.totalAllowedUndo = totalAllowedUndo;
     }
 }

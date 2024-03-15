@@ -21,4 +21,12 @@ public class GameController {
     public GameStatus getGameStatus(Game game){
         return game.getGameStatus();
     }
+
+    public Player getCurrentPlayer(Game game) {
+        return game.getCurrentPlayer();
+    }
+
+    public void undoMove(Game game) {
+        game.undoMove();
+    }
 }
